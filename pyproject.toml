@@ -1,10 +1,9 @@
 [tool.poetry]
-name = "news-reader"
+name = "gpt-news-reader"
 version = "0.1.0"
 description = ""
 authors = ["Kazato Sugimoto <uiureo@gmail.com>"]
 readme = "README.md"
-packages = [{include = "news_reader"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
