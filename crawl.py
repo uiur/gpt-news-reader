@@ -99,10 +99,11 @@ def main():
         article_data['url'] = article_url
         insert_article(connection, article_data)
 
-    latest_articles = get_latest_articles(connection, 3)
+    # latest_articles = get_latest_articles(connection, 3)
 
-    for article in latest_articles:
-        print(f"Title: {article['title']}\nSummary: {article['summary']}\n")
+    # for article in latest_articles:
+    #     print(f"Title: {article['title']}\nSummary: {article['summary']}\n")
+
     # Close the database connection
     connection.close()
 

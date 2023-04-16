@@ -5,26 +5,29 @@ import re
 
 def recommend_articles(articles):
     template = """
+    # Input
+
     {%- for id, title, summary, url in articles -%}
     {{ id }}: {{ title }}
     {% endfor %}
 
-    ---
-    Interested:
-    - International
-    - Business
+    # Objective
+    Recommend the most 3 important articles from the above articles.
 
-    DO NOT recommend:
-    - Sports
+    # Constraints
+    Remove articles related to the following topics, since your customer is NOT INTERESTED in them:
+    - Sad news (death, accident, etc.)
+    - Sports (soccer, baseball, etc.)
     - Entertainment
     - Politics
     - COVID-19
-    - Sad news (death, accident, etc.)
 
-    Output format:
-    N. id: title - reason
+    # Output format
+    1. id: title - reason
+    2. id: title - reason
+    3. id: title - reason
 
-    Recommend the most 3 important articles from the above articles.
+    # Output
 
     1.
     2.
@@ -38,7 +41,7 @@ def recommend_articles(articles):
       model="gpt-3.5-turbo",
       temperature=0.2,
       messages=[
-            {"role": "system", "content": "You are a professional editor. Your objective is to recommend news articles for your customer."},
+            {"role": "system", "content": "You are a professional news editor."},
             {"role": "user", "content": prompt },
         ]
     )
@@ -57,6 +60,9 @@ def recommend_articles(articles):
             article_description = match.group(4)
 
             recommended_articles.append((article_id, article_title, article_description))
+    if len(recommended_articles) != 3:
+        print(output)
+        raise Exception("The output is not in the correct format")
 
     return recommended_articles
 
